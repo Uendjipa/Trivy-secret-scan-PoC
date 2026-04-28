@@ -1,25 +1,21 @@
 name: Trivy Secret Scan
 
 on:
-   push:
-       branches: ["main"]
+  push:
+    branches: ["main"]
 jobs: 
   trivy-scan:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Checkout repo
-          uses: actions/checkout@v3
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-        - name: Install Trivy
-          run: |
-            sudo apt-get update
-            sudo apt-get install -y wget
-            wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.50.0_Linux-64bit.deb
-            sudo dkpg -i trivy_0.50.0_Linux-64bit.deb
-
-        - name: Run Trivy Secret Scan
-          run: |
-            trivy repo --scanners secret -exit-code 1 .
+      - name: Run Trivy Secret Scan
+        uses: aquasecurity/trivy-action@0.20.0
+        with: 
+          scan-type: 'fs'
+          scanners: 'secret'
+          exit-code: '1'
  
     
