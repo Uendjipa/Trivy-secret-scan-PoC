@@ -20,6 +20,6 @@ jobs:
 
         - name: Run Trivy Secret Scan
           run: |
-            trivy repo --scanners secret .
+            trivy repo --scanners secret -exit-code 1 .
  
     
