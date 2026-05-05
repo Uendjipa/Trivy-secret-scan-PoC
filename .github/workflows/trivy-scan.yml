@@ -2,8 +2,9 @@ name: Trivy Secret Scan
 
 on:
   push:
-    branches: ["main"]
-jobs: 
+    branches: [ "main" ]
+
+jobs:
   trivy-scan:
     runs-on: ubuntu-latest
 
@@ -12,10 +13,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Trivy Secret Scan
-        uses: aquasecurity/trivy-action@0.20.0
-        with: 
-          scan-type: 'fs'
-          scanners: 'secret'
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scanners: secret
           exit-code: '1'
  
     
